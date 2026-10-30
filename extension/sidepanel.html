@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Zoin</title>
+<link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+
+  <!-- First-run: ask for a name -->
+  <section id="screen-setup" class="screen">
+    <img class="brand-logo" src="logo.svg" alt="" />
+    <h1>Zoin</h1>
+    <p class="sub">What should we call you?</p>
+    <label class="avatar-upload" id="avatar-pick" title="Upload a photo (optional)">
+      <span id="setup-avatar" class="avatar big">?</span>
+      <span class="avatar-edit">＋</span>
+      <input id="avatar-input" type="file" accept="image/*" hidden />
+    </label>
+    <input id="setup-name" type="text" maxlength="20" placeholder="First name" />
+    <button id="setup-save" class="primary">Continue</button>
+  </section>
+
+  <!-- Lobby: server status, active rooms, create/join -->
+  <section id="screen-lobby" class="screen hidden">
+    <header class="topbar">
+      <div class="me">
+        <img class="brand-logo sm" src="bgless.svg" alt="" />
+        <span id="me-avatar" class="avatar"></span>
+        <span id="me-name"></span>
+      </div>
+      <span id="conn-dot" class="dot offline" title="Signaling server"></span>
+    </header>
+
+    <div class="create-box">
+      <div class="seg" id="room-visibility">
+        <button type="button" data-vis="public" class="active">Public</button>
+        <button type="button" data-vis="private">Private</button>
+      </div>
+      <button id="btn-create" class="primary full">+ Create room</button>
+    </div>
+
+    <h2 class="section-title">Join with a code</h2>
+    <div class="otp" id="otp">
+      <input type="text" inputmode="numeric" maxlength="1" />
+      <input type="text" inputmode="numeric" maxlength="1" />
+      <input type="text" inputmode="numeric" maxlength="1" />
+      <input type="text" inputmode="numeric" maxlength="1" />
+    </div>
+    <button id="btn-join" class="full">Join room</button>
+
+    <h2 class="section-title">Open rooms nearby</h2>
+    <ul id="room-list" class="room-list"></ul>
+    <p id="room-empty" class="empty hidden">No open rooms right now.</p>
+  </section>
+
+  <!-- Active room: peer status, chat, file transfer -->
+  <section id="screen-room" class="screen hidden">
+    <header class="topbar">
+      <button id="btn-leave" class="back">&larr;</button>
+      <div class="room-code">Room <span id="room-code-label"></span></div>
+    </header>
+
+    <div class="peers" id="peers-bar"></div>
+
+    <div id="chat-log" class="chat-log"></div>
+    <p id="drop-hint" class="drop-hint hidden">Drop to send</p>
+
+    <div class="chat-input-row">
+      <label class="icon-btn" id="file-pick-btn" title="Send a file">
+        +
+        <input id="file-input" type="file" hidden />
+      </label>
+      <textarea id="chat-input" rows="1" placeholder="Type a message…"></textarea>
+      <button id="chat-code" class="icon-btn" title="Share as a copyable code">&lt;/&gt;</button>
+      <button id="chat-send" class="icon-btn send" title="Send" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+          <path d="M3.4 20.4 21.6 12 3.4 3.6 3.4 10.2 16 12 3.4 13.8z" />
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Full-screen colorized code preview -->
+  <div id="code-modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>Shared code</span>
+        <div class="modal-actions">
+          <button id="modal-copy" type="button">Copy</button>
+          <button id="modal-close" class="icon-btn" type="button" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <pre class="code-view"><code id="modal-code"></code></pre>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

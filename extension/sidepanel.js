@@ -1,7 +1,8 @@
 // ====== CONFIG ======
 // Point this at wherever you run server/server.js.
 // ws:// for local/plain, wss:// if the server is behind TLS.
-const SIGNALING_URL = "ws://localhost:8080";
+// const SIGNALING_URL = "wss://server-unfurling-snowflake-1709.fly.dev";
+const SIGNALING_URL = "https://server-unfurling-snowflake-1709.fly.dev/";
 
 const CHUNK_SIZE = 16 * 1024; // 16KB per relayed chunk
 const BUFFER_THRESHOLD = 1 * 1024 * 1024; // back off if the socket is buffering > 1MB
@@ -574,7 +575,7 @@ function msgRow(isMe, avatar) {
 
 function renderChatMessage(text, isMe, from, avatar) {
   const bubble = msgRow(isMe, avatar);
-  bubble.innerHTML = `<span class="who">${!isMe ?? escapeHtml(from)}</span>${escapeHtml(text)}`;
+  bubble.innerHTML = `${!isMe ? `<span class="who">${escapeHtml(from)}</span>` : ""}${escapeHtml(text)}`;
 }
 
 function renderCodeMessage(text, isMe, from, avatar) {

@@ -489,7 +489,7 @@ function renderTransferRow(rowId, name, incoming, from) {
   const bubble = msgRow(!incoming, incoming ? from.avatar : me.avatar);
   bubble.classList.add("file-msg");
   bubble.id = rowId;
-  bubble.innerHTML = `<span class="who">${incoming ? escapeHtml(from.name) : "You"}</span>
+  bubble.innerHTML = `<span class="who">${incoming ? escapeHtml(from.name) : ""}</span>
     <span class="t-name">📎 ${escapeHtml(name)}</span>
     <div class="t-bar"><div class="t-fill"></div></div>`;
 }
